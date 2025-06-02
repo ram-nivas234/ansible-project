@@ -1,4 +1,5 @@
 #Keep all files in same folder 
+
 Practice and run commands - 
 ( i used 2 server , first one is master node and second One is worker node and try to Run Script in both and created a cluster Setup ready Ansible guide )
 
