@@ -1,0 +1,55 @@
+
+- name: Run a script on masternode machines
+  hosts: masternode
+  become: true
+  vars:
+    script_local_path: ./master.sh
+    script_remote_path: ~/master.sh
+
+  tasks:
+    - name: Copy script to master machine
+      copy:
+        src: "{{ script_local_path }}"
+        dest: "{{ script_remote_path }}"
+        mode: '0755'
+
+    - name: Execute the script_master.sh
+      command: "{{ script_remote_path }}"
+
+
+- hosts: masternode
+  name: fetch join token file
+  gather_facts: false
+  become: true
+  tasks:
+  - name: fetch join token file
+    ansible.builtin.fetch:
+      src: /home/anshul/join-command.sh
+      dest: ./join-command.sh
+      flat: yes
+      validate_checksum: false
+
+
+- name: Run a script on masternode machines
+  hosts: workernode1,workernode2
+  become: true
+ 
+  tasks:
+    - name: Copy script to remote machine
+      copy:
+        src: ./worker.sh
+        dest:   /home/anshul/worker.sh
+        mode: '0755'
+
+    - name: Execute the script_worker.sh
+      command:  /home/anshul/worker.sh
+
+    - name: Copy token to workers machine
+      copy:
+        src: ./join-command.sh
+        dest:  /home/anshul/join-command.sh
+        mode: '0755'
+    
+    - name: Execute the script_join-command.sh
+      command: /home/anshul/join-command.sh
+      
