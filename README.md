@@ -1,4 +1,4 @@
-Keep all files in same folder 
+#Keep all files in same folder 
 Practice and run commands - 
 ( i used 2 server , first one is master node and second One is worker node and try to Run Script in both and created a cluster Setup ready Ansible guide )
 
@@ -16,7 +16,7 @@ Practice and run commands -
 
 5 sudo EDITOR=vim visudo
   anshul ALL=(ALL) NOPASSWD: ALL (add this line in the end )
-  # Use this to give superuser permission
+  **Use this to give superuser permission
 
 6 ansible-playbook cluster_playbook.yml -v
 
